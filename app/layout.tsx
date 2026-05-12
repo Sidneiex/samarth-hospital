@@ -1,35 +1,23 @@
 import type { Metadata } from "next";
-import { Playfair_Display, DM_Sans } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/context/LanguageContext";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ScrollProgress from "@/components/shared/ScrollProgress";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-});
-
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
   title: "Samarth Hospital & Maternity Home | Rahata, Ahilyanagar",
   description:
-    "Samarth Hospital and Maternity Home in Kolhar Budruk, Rahata — offering expert gynecology, maternity care, surgical services, sonography, and pathology lab since 2007. Trusted by thousands of families.",
+    "Samarth Hospital and Maternity Home in Kolhar Budruk, Rahata — expert gynecology, maternity care, surgical services, sonography, and pathology lab since 2007.",
   keywords:
     "Samarth Hospital, maternity home Rahata, gynecologist Ahilyanagar, Dr Vikram Nalkar, Dr Priti Doshi, hospital Kolhar, sonography Rahata",
-  openGraph: {
-    title: "Samarth Hospital & Maternity Home",
-    description:
-      "Expert maternity care, gynecology & surgical services in Rahata since 2007.",
-    type: "website",
-  },
 };
 
 export default function RootLayout({
@@ -38,12 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${playfair.variable} ${dmSans.variable}`}
-      suppressHydrationWarning
-    >
-      <body className="bg-[#0A1628] text-white font-[var(--font-dm-sans)] min-h-screen overflow-x-hidden">
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
+      <body className="bg-white text-navy font-sans antialiased">
         <LanguageProvider>
           <ScrollProgress />
           <Navbar />
