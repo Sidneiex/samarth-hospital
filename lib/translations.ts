@@ -1,0 +1,381 @@
+export type Language = "en" | "hi";
+
+export const t = {
+  en: {
+    nav: {
+      home: "Home",
+      services: "Services",
+      about: "About Us",
+      appointment: "Appointment",
+      bookNow: "Book Appointment",
+    },
+    hero: {
+      eyebrow: "Est. 2007 · Rahata, Ahilyanagar",
+      title: "Samarth Hospital",
+      subtitle: "& Maternity Home",
+      tagline: "Where New Life Begins.\nWhere Healing Never Ends.",
+      cta1: "Book Appointment",
+      cta2: "Explore Services",
+      badge: "Govt. Approved Sonography Center",
+    },
+    stats: [
+      { value: "18+", label: "Years of Service" },
+      { value: "30", label: "Bed Facility" },
+      { value: "5000+", label: "Deliveries" },
+      { value: "2", label: "Specialist Doctors" },
+    ],
+    services: {
+      heading: "Our Services",
+      subheading: "Comprehensive care under one roof — from maternity to advanced surgical procedures.",
+      items: [
+        {
+          title: "Maternity & Delivery",
+          desc: "Safe, natural, and painless deliveries with round-the-clock monitoring and post-natal care.",
+          icon: "baby",
+        },
+        {
+          title: "Gynecology & Surgery",
+          desc: "Comprehensive women's health — from routine consultations to advanced gynecological procedures.",
+          icon: "stethoscope",
+        },
+        {
+          title: "Operation Theatre",
+          desc: "Fully equipped, sterile OT for all types of surgeries with visiting specialist surgeons.",
+          icon: "scalpel",
+        },
+        {
+          title: "Sonography Center",
+          desc: "Government-approved center for all prenatal, gynecological, and abdominal sonography.",
+          icon: "scan",
+        },
+        {
+          title: "Pathology Lab",
+          desc: "In-house diagnostic lab for blood tests, urine analysis, cultures, and routine screenings.",
+          icon: "flask",
+        },
+        {
+          title: "Family Planning",
+          desc: "Confidential counselling and surgical options for family planning and population welfare.",
+          icon: "heart",
+        },
+        {
+          title: "Cancer Screening",
+          desc: "Early detection and treatment support for uterine and cervical cancer.",
+          icon: "shield",
+        },
+        {
+          title: "Medical Store",
+          desc: "On-site pharmacy with a wide range of prescribed and over-the-counter medications.",
+          icon: "pill",
+        },
+      ],
+    },
+    doctors: {
+      heading: "Our Doctors",
+      subheading: "Two decades of expertise, guiding thousands of families through their most important moments.",
+      dr1: {
+        name: "Dr. Vikram A. Nalkar",
+        qualification: "M.S. (Pune)",
+        specialty: "General & Laparoscopic Surgeon",
+        reg: "Reg. No. I-45257-A-I",
+        experience: "20+ years of surgical experience",
+        bio: "Dr. Nalkar brings over two decades of surgical expertise to Samarth Hospital. Trained at Pune, he oversees all major and minor surgical procedures and leads the hospital's clinical operations with precision and compassion.",
+      },
+      dr2: {
+        name: "Dr. Priti Doshi",
+        qualification: "M.B.B.S., D.F.W., D.G.O. (Gold Medal)",
+        specialty: "Gynecologist, Obstetrician & Infertility Specialist",
+        reg: "Reg. No. 698/02/2001",
+        experience: "20+ years in women's health",
+        bio: "Dr. Doshi is a Gold Medalist with a Fellowship in the American College of Ob's & Gynaec. Her expertise in high-risk pregnancies, infertility treatment, and gynecological surgery has made her one of the most trusted names in women's healthcare in the region.",
+        fellowship: "Fellowship — American College of Ob's & Gynaec",
+      },
+    },
+    why: {
+      heading: "Why Families Trust Us",
+      subheading: "Every decision at Samarth is made with one goal — your family's wellbeing.",
+      items: [
+        {
+          title: "18 Years in the Community",
+          desc: "Since 2007, we have been the first call for families across Rahata, Kolhar, and Ahmednagar during life's most critical moments.",
+        },
+        {
+          title: "Gold Medal Expertise",
+          desc: "Our senior gynecologist is a Gold Medalist with international fellowship training — bringing world-class care to your doorstep.",
+        },
+        {
+          title: "30-Bed Inpatient Facility",
+          desc: "A fully equipped, comfortable inpatient ward ensuring quality recovery in a calm, monitored environment.",
+        },
+        {
+          title: "Complete Under One Roof",
+          desc: "Consultation, surgery, sonography, lab, pharmacy — everything your family needs without leaving the premises.",
+        },
+      ],
+    },
+    testimonials: {
+      heading: "What Families Say",
+      subheading: "Real words from people who trusted us in their most important moments.",
+      items: [
+        {
+          name: "Sunita Mhaske",
+          location: "Rahata",
+          text: "Dr. Priti tai ने मेरी delivery इतने care से की कि मुझे एक पल के लिए भी डर नहीं लगा। Staff बहुत helpful था।",
+          rating: 5,
+        },
+        {
+          name: "Ramesh Patil",
+          location: "Kolhar",
+          text: "My wife had a complicated surgery — Dr. Nalkar sir handled everything with complete calm. The hospital felt like family.",
+          rating: 5,
+        },
+        {
+          name: "Kavita Thorat",
+          location: "Shrirampur",
+          text: "From sonography to delivery, everything happened here. The lab reports come fast and the medicines are available on-site. Very convenient.",
+          rating: 5,
+        },
+      ],
+    },
+    opd: {
+      heading: "OPD Timings",
+      morning: "Morning",
+      evening: "Evening",
+      sunday: "Sunday",
+      morningTime: "10:00 AM – 2:00 PM",
+      eveningTime: "5:00 PM – 8:00 PM",
+      sundayNote: "By Appointment Only",
+      days: "Monday – Saturday",
+    },
+    contact: {
+      heading: "Find Us",
+      address: "Patilbanagar, Kolhar Budruk, Tal. Rahata, Dist. Ahilyanagar, Maharashtra – 413710",
+      phone1: "(02422) 295588",
+      phone2: "87999 18682",
+      email: "dr.vikramnalkar51@gmail.com",
+    },
+    footer: {
+      tagline: "Trusted care for every family, every life — since 2007.",
+      rights: "© 2024 Samarth Hospital & Maternity Home. All rights reserved.",
+      quickLinks: "Quick Links",
+      services: "Services",
+      contact: "Contact",
+    },
+    appointment: {
+      heading: "Book an Appointment",
+      subheading: "Fill in your details and our team will confirm your slot within a few hours.",
+      name: "Full Name",
+      phone: "Phone Number",
+      date: "Preferred Date",
+      time: "Preferred Time",
+      department: "Department",
+      message: "Your message (optional)",
+      submit: "Request Appointment",
+      success: "Your request has been submitted. We will contact you shortly.",
+    },
+    services_page: {
+      heading: "Everything You Need, Under One Roof",
+      subheading: "From the first prenatal visit to post-surgical recovery — Samarth Hospital has you covered.",
+    },
+    about_page: {
+      heading: "Our Story",
+      subheading: "Eighteen years of service to the families of Rahata and beyond.",
+      story: [
+        "Samarth Hospital and Maternity Home was founded in 2007 by Dr. Vikram Nalkar and Dr. Priti Doshi with a single purpose: to bring reliable, expert medical care closer to the families of rural and semi-urban Maharashtra.",
+        "What began as a modest maternity and gynecology practice has grown into a comprehensive 30-bed hospital — equipped with a modern operation theatre, government-approved sonography center, in-house pathology laboratory, and medical store.",
+        "Over eighteen years, we have been present for thousands of births, surgeries, and recoveries. Every patient who walks through our doors is treated as family — not a number on a chart.",
+      ],
+      mission: "To deliver honest, expert, and compassionate medical care to every patient — regardless of background — and to be the most trusted hospital in the Rahata region.",
+      vision: "A healthier community where every family has access to world-class healthcare within reach.",
+    },
+  },
+
+  hi: {
+    nav: {
+      home: "होम",
+      services: "सेवाएं",
+      about: "हमारे बारे में",
+      appointment: "अपॉइंटमेंट",
+      bookNow: "अपॉइंटमेंट बुक करें",
+    },
+    hero: {
+      eyebrow: "स्थापित 2007 · राहाता, अहिल्यानगर",
+      title: "समर्थ हॉस्पिटल",
+      subtitle: "एवं मातृत्व गृह",
+      tagline: "जहाँ नई ज़िंदगी शुरू होती है।\nजहाँ उपचार कभी नहीं रुकता।",
+      cta1: "अपॉइंटमेंट लें",
+      cta2: "हमारी सेवाएं देखें",
+      badge: "सरकारमान्य सोनोग्राफी केंद्र",
+    },
+    stats: [
+      { value: "18+", label: "वर्षों की सेवा" },
+      { value: "30", label: "बेड की सुविधा" },
+      { value: "5000+", label: "प्रसव" },
+      { value: "2", label: "विशेषज्ञ डॉक्टर" },
+    ],
+    services: {
+      heading: "हमारी सेवाएं",
+      subheading: "मातृत्व से लेकर उन्नत शल्य चिकित्सा तक — सब कुछ एक ही छत के नीचे।",
+      items: [
+        {
+          title: "प्रसव एवं मातृत्व देखभाल",
+          desc: "सुरक्षित, प्राकृतिक और दर्दरहित प्रसव के साथ चौबीसों घंटे निगरानी और प्रसवोत्तर देखभाल।",
+          icon: "baby",
+        },
+        {
+          title: "स्त्री रोग एवं शल्य चिकित्सा",
+          desc: "महिलाओं के स्वास्थ्य की व्यापक देखभाल — नियमित परामर्श से लेकर उन्नत स्त्री रोग प्रक्रियाओं तक।",
+          icon: "stethoscope",
+        },
+        {
+          title: "ऑपरेशन थियेटर",
+          desc: "सभी प्रकार की शल्य चिकित्साओं के लिए पूरी तरह सुसज्जित, बाँझ ओटी।",
+          icon: "scalpel",
+        },
+        {
+          title: "सोनोग्राफी केंद्र",
+          desc: "सभी प्रसव पूर्व, स्त्री रोग और पेट संबंधी सोनोग्राफी के लिए सरकार द्वारा अनुमोदित केंद्र।",
+          icon: "scan",
+        },
+        {
+          title: "पैथोलॉजी लैब",
+          desc: "रक्त परीक्षण, मूत्र विश्लेषण और नियमित जांच के लिए इन-हाउस डायग्नोस्टिक लैब।",
+          icon: "flask",
+        },
+        {
+          title: "परिवार नियोजन",
+          desc: "परिवार नियोजन के लिए गोपनीय परामर्श और शल्य चिकित्सा विकल्प।",
+          icon: "heart",
+        },
+        {
+          title: "कैंसर जांच",
+          desc: "गर्भाशय और सर्वाइकल कैंसर का प्रारंभिक पता लगाना और उपचार सहायता।",
+          icon: "shield",
+        },
+        {
+          title: "मेडिकल स्टोर",
+          desc: "निर्धारित और ओटीसी दवाओं की विस्तृत श्रृंखला के साथ परिसर में ही फार्मेसी।",
+          icon: "pill",
+        },
+      ],
+    },
+    doctors: {
+      heading: "हमारे डॉक्टर",
+      subheading: "दो दशकों की विशेषज्ञता, हजारों परिवारों को उनके सबसे महत्वपूर्ण पलों में मार्गदर्शन।",
+      dr1: {
+        name: "डॉ. विक्रम अ. नालकर",
+        qualification: "एम.एस. (पुणे)",
+        specialty: "जनरल एवं लेप्रोस्कोपिक सर्जन",
+        reg: "रजि. नं. I-45257-A-I",
+        experience: "20+ वर्षों का शल्य चिकित्सा अनुभव",
+        bio: "डॉ. नालकर समर्थ हॉस्पिटल में दो दशकों से अधिक का शल्य चिकित्सा अनुभव लाते हैं। पुणे में प्रशिक्षित, वे सभी प्रमुख और छोटी शल्य प्रक्रियाओं की देखरेख करते हैं।",
+      },
+      dr2: {
+        name: "डॉ. प्रीति दोशी",
+        qualification: "एम.बी.बी.एस., डी.एफ.डब्ल्यू., डी.जी.ओ. (गोल्ड मेडल)",
+        specialty: "स्त्री रोग विशेषज्ञ, प्रसूति विशेषज्ञ एवं बंधत्व निवारण तज्ञ",
+        reg: "रजि. नं. 698/02/2001",
+        experience: "महिला स्वास्थ्य में 20+ वर्ष",
+        bio: "डॉ. दोशी गोल्ड मेडलिस्ट हैं और अमेरिकन कॉलेज ऑफ ओब्स एंड गाइनेक की फेलो हैं। उच्च जोखिम वाली गर्भावस्था, बंधत्व उपचार और स्त्री रोग शल्य चिकित्सा में उनकी विशेषज्ञता ने उन्हें क्षेत्र में सबसे विश्वसनीय नाम बनाया है।",
+        fellowship: "फेलोशिप — अमेरिकन कॉलेज ऑफ ओब्स एंड गाइनेक",
+      },
+    },
+    why: {
+      heading: "परिवार हम पर क्यों भरोसा करते हैं",
+      subheading: "समर्थ में हर निर्णय एक लक्ष्य को ध्यान में रखकर लिया जाता है — आपके परिवार की भलाई।",
+      items: [
+        {
+          title: "18 वर्षों की सेवा",
+          desc: "2007 से, हम राहाता, कोल्हार और अहमदनगर के परिवारों के लिए जीवन के सबसे महत्वपूर्ण क्षणों में पहली पसंद रहे हैं।",
+        },
+        {
+          title: "गोल्ड मेडल विशेषज्ञता",
+          desc: "हमारी वरिष्ठ स्त्री रोग विशेषज्ञ गोल्ड मेडलिस्ट हैं और अंतरराष्ट्रीय फेलोशिप प्रशिक्षण प्राप्त हैं।",
+        },
+        {
+          title: "30 बेड की इनपेशेंट सुविधा",
+          desc: "पूरी तरह से सुसज्जित, आरामदायक इनपेशेंट वार्ड।",
+        },
+        {
+          title: "एक ही छत के नीचे सब कुछ",
+          desc: "परामर्श, शल्य चिकित्सा, सोनोग्राफी, लैब, फार्मेसी — परिसर छोड़े बिना सब कुछ।",
+        },
+      ],
+    },
+    testimonials: {
+      heading: "परिवार क्या कहते हैं",
+      subheading: "उन लोगों के असली शब्द जिन्होंने हम पर भरोसा किया।",
+      items: [
+        {
+          name: "सुनिता म्हस्के",
+          location: "राहाता",
+          text: "डॉ. प्रीती ताई ने मेरी डिलीवरी इतने care से की कि मुझे एक पल के लिए भी डर नहीं लगा। स्टाफ बहुत helpful था।",
+          rating: 5,
+        },
+        {
+          name: "रमेश पाटील",
+          location: "कोल्हार",
+          text: "मेरी पत्नी की जटिल सर्जरी थी — डॉ. नालकर सर ने सब कुछ पूरी शांति से संभाला। अस्पताल परिवार जैसा लगा।",
+          rating: 5,
+        },
+        {
+          name: "कविता थोरात",
+          location: "श्रीरामपुर",
+          text: "सोनोग्राफी से लेकर डिलीवरी तक, सब कुछ यहाँ हुआ। लैब रिपोर्ट जल्दी आती हैं और दवाएं परिसर में ही उपलब्ध हैं।",
+          rating: 5,
+        },
+      ],
+    },
+    opd: {
+      heading: "ओपीडी समय",
+      morning: "सुबह",
+      evening: "शाम",
+      sunday: "रविवार",
+      morningTime: "सुबह 10:00 – दोपहर 2:00",
+      eveningTime: "शाम 5:00 – रात 8:00",
+      sundayNote: "केवल अपॉइंटमेंट से",
+      days: "सोमवार – शनिवार",
+    },
+    contact: {
+      heading: "हमें खोजें",
+      address: "पाटीलबा नगर, कोल्हार बुद्रुक, ता. राहाता, जि. अहिल्यानगर, महाराष्ट्र – 413710",
+      phone1: "(02422) 295588",
+      phone2: "87999 18682",
+      email: "dr.vikramnalkar51@gmail.com",
+    },
+    footer: {
+      tagline: "हर परिवार के लिए विश्वसनीय देखभाल — 2007 से।",
+      rights: "© 2024 समर्थ हॉस्पिटल एवं मातृत्व गृह। सर्वाधिकार सुरक्षित।",
+      quickLinks: "त्वरित लिंक",
+      services: "सेवाएं",
+      contact: "संपर्क",
+    },
+    appointment: {
+      heading: "अपॉइंटमेंट बुक करें",
+      subheading: "अपना विवरण भरें और हमारी टीम कुछ घंटों में आपके स्लॉट की पुष्टि करेगी।",
+      name: "पूरा नाम",
+      phone: "फोन नंबर",
+      date: "पसंदीदा तारीख",
+      time: "पसंदीदा समय",
+      department: "विभाग",
+      message: "आपका संदेश (वैकल्पिक)",
+      submit: "अपॉइंटमेंट का अनुरोध करें",
+      success: "आपका अनुरोध जमा हो गया है। हम जल्द ही आपसे संपर्क करेंगे।",
+    },
+    services_page: {
+      heading: "एक ही छत के नीचे सब कुछ",
+      subheading: "पहली प्रसव पूर्व यात्रा से लेकर पोस्ट-सर्जिकल रिकवरी तक।",
+    },
+    about_page: {
+      heading: "हमारी कहानी",
+      subheading: "राहाता और उसके आसपास के परिवारों की अठारह वर्षों की सेवा।",
+      story: [
+        "समर्थ हॉस्पिटल एवं मातृत्व गृह की स्थापना 2007 में डॉ. विक्रम नालकर और डॉ. प्रीति दोशी ने एक उद्देश्य से की थी — ग्रामीण और अर्ध-शहरी महाराष्ट्र के परिवारों के करीब विश्वसनीय, विशेषज्ञ चिकित्सा देखभाल लाना।",
+        "एक साधारण मातृत्व और स्त्री रोग अभ्यास के रूप में शुरू हुई यह यात्रा एक व्यापक 30-बेड अस्पताल में बदल गई है।",
+        "अठारह वर्षों में, हम हजारों जन्मों, शल्य चिकित्साओं और स्वास्थ्य लाभों में उपस्थित रहे हैं। हमारे दरवाजे से गुजरने वाले हर मरीज को परिवार की तरह माना जाता है।",
+      ],
+      mission: "हर मरीज को — चाहे उनकी पृष्ठभूमि कुछ भी हो — ईमानदार, विशेषज्ञ और दयालु चिकित्सा देखभाल प्रदान करना।",
+      vision: "एक स्वस्थ समुदाय जहाँ हर परिवार को विश्व स्तरीय स्वास्थ्य सेवा की पहुँच हो।",
+    },
+  },
+} as const;

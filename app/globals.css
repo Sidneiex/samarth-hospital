@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+:root {
+  --navy-950: #050E1A;
+  --navy-900: #0A1628;
+  --navy-800: #0E2040;
+  --navy-700: #112850;
+  --gold-300: #E8CC8A;
+  --gold-400: #D4B06A;
+  --gold-500: #C9A84C;
+  --gold-600: #B8922A;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #0A1628;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #C9A84C;
+  color: #0A1628;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #050E1A; }
+::-webkit-scrollbar-thumb { background: #C9A84C; border-radius: 3px; }
+
+/* scroll progress */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #C9A84C, #E8CC8A);
+  z-index: 9999;
+  transform-origin: left center;
+  transform: scaleX(0);
+  will-change: transform;
+}
+
+/* initial hidden states for GSAP */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(50px);
+}
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+/* gold shimmer line */
+.gold-line {
+  display: block;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, #C9A84C, transparent);
+}
+
+/* glass surface */
+.glass {
+  background: rgba(14, 32, 64, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(201, 168, 76, 0.18);
+}
+
+/* service card hover */
+.service-card {
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+.service-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(201, 168, 76, 0.5) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(201, 168, 76, 0.2);
+}
+
+/* nav link underline */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: #C9A84C;
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* mobile menu */
+.mobile-menu {
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.mobile-menu.open {
+  transform: translateX(0);
+}
+
+/* custom input focus */
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #C9A84C !important;
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+}
