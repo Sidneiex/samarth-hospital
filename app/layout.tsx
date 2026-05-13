@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { LanguageProvider } from "@/context/LanguageContext";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ScrollProgress from "@/components/shared/ScrollProgress";
+import LoadingScreen from "@/components/shared/LoadingScreen";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -27,13 +27,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
-      <body className="bg-white text-navy font-sans antialiased">
-        <LanguageProvider>
-          <ScrollProgress />
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-        </LanguageProvider>
+      <body className="bg-white text-[#0a1628] font-[family-name:var(--font-inter)] antialiased">
+        <LoadingScreen />
+        <ScrollProgress />
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

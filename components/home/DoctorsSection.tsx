@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { useLanguage } from "@/context/LanguageContext";
+import { content } from "@/lib/content";
 
 export default function DoctorsSection() {
-  const { translations: tr } = useLanguage();
+  const d = content.doctors;
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -15,66 +16,58 @@ export default function DoctorsSection() {
       const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([import("gsap"), import("gsap/ScrollTrigger")]);
       gsap.registerPlugin(ScrollTrigger);
       ctx = gsap.context(() => {
-        gsap.fromTo(".doc-card", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "power2.out", scrollTrigger: { trigger: ".doc-grid", start: "top 82%" } });
-        gsap.fromTo(".doc-heading", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", scrollTrigger: { trigger: ".doc-heading", start: "top 88%" } });
+        gsap.fromTo(".dc-head", { opacity: 0, y: 24 }, {
+          opacity: 1, y: 0, duration: 0.6, ease: "power3.out",
+          scrollTrigger: { trigger: ".dc-head", start: "top 88%" }
+        });
+        gsap.fromTo(".dc-card", { opacity: 0, y: 30, rotateX: 4 }, {
+          opacity: 1, y: 0, rotateX: 0, duration: 0.7, stagger: 0.15, ease: "power3.out",
+          scrollTrigger: { trigger: ".dc-grid", start: "top 82%" }
+        });
       }, ref);
     }
     init();
     return () => ctx?.revert();
   }, []);
 
-  const docs = tr.doctors;
+  const doctors = [
+    { ...d.dr1, img: "/images/doctor-male.jpg" },
+    { ...d.dr2, img: "/images/doctor-female.jpg" },
+  ];
 
   return (
-    <section ref={ref} className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="doc-heading flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+    <section ref={ref} className="py-24 lg:py-32 bg-white">
+      <div className="site-container">
+        <div className="dc-head flex items-end justify-between mb-14">
           <div>
-            <p className="text-xs font-semibold text-navy/40 uppercase tracking-widest mb-2">Our Specialists</p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-navy">{docs.heading}</h2>
+            <h2 className="text-2xl sm:text-[2rem] font-bold tracking-tight">{d.heading}</h2>
+            <p className="text-gray-400 text-[15px] mt-2">{d.subheading}</p>
           </div>
-          <Link href="/about" className="inline-flex items-center gap-1.5 text-sm font-medium text-navy hover:gap-2.5 transition-all duration-200 group whitespace-nowrap">
-            Full team <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+          <Link href="/about" className="hidden sm:flex items-center gap-1.5 text-sm font-medium text-[#0a1628]/40 hover:text-[#0a1628] transition-colors group">
+            {d.viewTeam} <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-300" />
           </Link>
         </div>
 
-        <div className="doc-grid grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Dr. Vikram */}
-          <div className="doc-card flex flex-col sm:flex-row gap-6 p-7 rounded-2xl border border-slate-100 bg-white card-hover">
-            <div className="img-placeholder w-full sm:w-28 h-40 sm:h-28 rounded-xl flex-shrink-0">
-              <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
+        <div className="dc-grid grid grid-cols-1 md:grid-cols-2 gap-6">
+          {doctors.map((doc, i) => (
+            <div key={i} className="dc-card prem-card p-8 flex flex-col sm:flex-row gap-7">
+              <div className="w-full sm:w-32 h-40 sm:h-36 rounded-2xl overflow-hidden flex-shrink-0 bg-gray-100">
+                <Image src={doc.img} alt={doc.name} width={128} height={160} className="w-full h-full object-cover" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="text-[10px] text-[#0a1628]/25 font-semibold tracking-[.2em] uppercase">{doc.role}</p>
+                <h3 className="font-bold text-xl mt-1 tracking-tight">{doc.name}</h3>
+                <p className="text-gray-500 text-sm mt-1">{doc.qualification}</p>
+                <p className="text-gray-400 text-[12px] mt-0.5">{doc.specialty}</p>
+                <div className="mt-4 pt-4 border-t border-gray-100">
+                  <p className="text-gray-400 text-sm">{doc.experience}</p>
+                </div>
+              </div>
             </div>
-            <div>
-              <p className="text-xs text-navy/40 font-semibold uppercase tracking-widest mb-1.5">Surgeon & Medical Director</p>
-              <h3 className="text-navy font-bold text-xl">{docs.dr1.name}</h3>
-              <p className="text-slate-500 text-sm mt-0.5">{docs.dr1.qualification}</p>
-              <p className="text-slate-400 text-xs mt-0.5 mb-3">{docs.dr1.reg}</p>
-              <p className="text-slate-500 text-sm leading-relaxed">{docs.dr1.experience}</p>
-            </div>
-          </div>
-
-          {/* Dr. Priti */}
-          <div className="doc-card flex flex-col sm:flex-row gap-6 p-7 rounded-2xl border border-slate-100 bg-white card-hover">
-            <div className="img-placeholder w-full sm:w-28 h-40 sm:h-28 rounded-xl flex-shrink-0">
-              <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
-            </div>
-            <div>
-              <p className="text-xs text-navy/40 font-semibold uppercase tracking-widest mb-1.5">Gynecologist & Obstetrician</p>
-              <h3 className="text-navy font-bold text-xl">{docs.dr2.name}</h3>
-              <p className="text-slate-500 text-sm mt-0.5">{docs.dr2.qualification}</p>
-              <p className="text-slate-400 text-xs mt-0.5 mb-3">{docs.dr2.reg}</p>
-              <p className="text-slate-500 text-sm leading-relaxed">{docs.dr2.experience}</p>
-            </div>
-          </div>
+          ))}
         </div>
 
-        <p className="mt-5 text-slate-400 text-sm">
-          Visiting specialists (anesthetist + surgical consultants) available for planned procedures.
-        </p>
+        <p className="mt-8 text-gray-400 text-[13px] text-center">{d.visitingNote}</p>
       </div>
     </section>
   );

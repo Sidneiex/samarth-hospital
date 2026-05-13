@@ -2,12 +2,11 @@
 
 import { useEffect, useRef } from "react";
 import { Clock, Phone, Mail, MapPin } from "lucide-react";
-import { useLanguage } from "@/context/LanguageContext";
+import { content } from "@/lib/content";
 
 export default function OPDTimings() {
-  const { translations: tr } = useLanguage();
-  const opd = tr.opd;
-  const c = tr.contact;
+  const o = content.opd;
+  const c = content.contact;
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -16,7 +15,14 @@ export default function OPDTimings() {
       const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([import("gsap"), import("gsap/ScrollTrigger")]);
       gsap.registerPlugin(ScrollTrigger);
       ctx = gsap.context(() => {
-        gsap.fromTo(".opd-col", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "power2.out", scrollTrigger: { trigger: ".opd-row", start: "top 82%" } });
+        gsap.fromTo(".opd-head", { opacity: 0, y: 20 }, {
+          opacity: 1, y: 0, duration: 0.6, ease: "power3.out",
+          scrollTrigger: { trigger: ".opd-head", start: "top 88%" }
+        });
+        gsap.fromTo(".opd-block", { opacity: 0, y: 24 }, {
+          opacity: 1, y: 0, duration: 0.45, stagger: 0.08, ease: "power3.out",
+          scrollTrigger: { trigger: ".opd-grid", start: "top 85%" }
+        });
       }, ref);
     }
     init();
@@ -24,84 +30,82 @@ export default function OPDTimings() {
   }, []);
 
   return (
-    <section ref={ref} className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-12">
-          <p className="text-xs font-semibold text-navy/40 uppercase tracking-widest mb-2">Visit Us</p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-navy">OPD Timings & Contact</h2>
-        </div>
+    <section ref={ref} className="py-24 lg:py-32 bg-white">
+      <div className="site-container">
+        <h2 className="opd-head text-2xl sm:text-[2rem] font-bold tracking-tight mb-14">{o.heading}</h2>
 
-        <div className="opd-row grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Timings */}
-          <div className="opd-col lg:col-span-1 p-7 rounded-2xl border border-slate-100 bg-white">
-            <div className="flex items-center gap-2.5 mb-6">
-              <Clock className="w-5 h-5 text-navy" strokeWidth={1.75} />
-              <p className="text-navy font-semibold text-lg">{opd.heading}</p>
+        <div className="opd-grid grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* OPD Card */}
+          <div className="opd-block prem-card p-8">
+            <div className="flex items-center gap-3 mb-7">
+              <div className="w-10 h-10 rounded-xl bg-[#0a1628]/[.04] flex items-center justify-center">
+                <Clock className="w-5 h-5 text-[#0a1628]" strokeWidth={1.75} />
+              </div>
+              <span className="font-semibold text-lg tracking-tight">{o.timingsTitle}</span>
             </div>
 
-            <div className="space-y-4">
-              <div>
-                <p className="text-xs text-navy/40 font-semibold uppercase tracking-wider mb-2.5">{opd.days}</p>
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-slate-500">{opd.morning}</span>
-                    <span className="text-navy font-medium">{opd.morningTime}</span>
-                  </div>
-                  <div className="h-px bg-slate-100" />
-                  <div className="flex justify-between text-sm">
-                    <span className="text-slate-500">{opd.evening}</span>
-                    <span className="text-navy font-medium">{opd.eveningTime}</span>
-                  </div>
-                </div>
-              </div>
+            <p className="text-[10px] text-[#0a1628]/25 font-semibold tracking-[.2em] uppercase mb-4">{o.days}</p>
 
-              <div className="pt-3 border-t border-slate-100">
-                <div className="flex justify-between text-sm">
-                  <span className="text-slate-500">{opd.sunday}</span>
-                  <span className="text-navy font-medium">{opd.sundayNote}</span>
-                </div>
+            <div className="space-y-4 text-[15px]">
+              <div className="flex justify-between items-center">
+                <span className="text-gray-400">{o.morning}</span>
+                <span className="font-semibold">{o.morningTime}</span>
+              </div>
+              <div className="h-px bg-black/[.04]" />
+              <div className="flex justify-between items-center">
+                <span className="text-gray-400">{o.evening}</span>
+                <span className="font-semibold">{o.eveningTime}</span>
+              </div>
+              <div className="h-px bg-black/[.04]" />
+              <div className="flex justify-between items-center">
+                <span className="text-gray-400">{o.sunday}</span>
+                <span className="font-semibold">{o.sundayNote}</span>
               </div>
             </div>
 
-            <div className="mt-5 pt-5 border-t border-slate-100 flex items-center gap-2 text-xs text-slate-400">
-              <span className="w-2 h-2 rounded-full bg-green-400" />
-              Emergencies: call any time
+            <div className="mt-7 pt-5 border-t border-black/[.04] flex items-center gap-2 text-[13px] text-gray-400">
+              <span className="w-2 h-2 rounded-full bg-green-400 pulse-dot" /> {o.emergency}
             </div>
           </div>
 
-          {/* Contact details */}
-          <div className="opd-col lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="p-6 rounded-xl border border-slate-100 flex items-start gap-3">
-              <MapPin className="w-4.5 h-4.5 text-navy mt-0.5 flex-shrink-0" strokeWidth={1.75} />
+          {/* Contact 2×2 */}
+          <div className="opd-block lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div className="prem-card p-7 flex gap-4">
+              <div className="w-10 h-10 rounded-xl bg-[#0a1628]/[.04] flex items-center justify-center flex-shrink-0">
+                <MapPin className="w-5 h-5 text-[#0a1628]" strokeWidth={1.5} />
+              </div>
               <div>
-                <p className="text-xs text-navy/40 font-semibold uppercase tracking-wider mb-1.5">Address</p>
-                <p className="text-slate-600 text-sm leading-relaxed">{c.address}</p>
+                <p className="text-[10px] text-[#0a1628]/25 font-semibold tracking-[.2em] uppercase mb-2">{c.addressLabel}</p>
+                <p className="text-gray-500 text-[14px] leading-[1.7]">{c.address}</p>
               </div>
             </div>
 
-            <div className="p-6 rounded-xl border border-slate-100 flex items-start gap-3">
-              <Phone className="w-4.5 h-4.5 text-navy mt-0.5 flex-shrink-0" strokeWidth={1.75} />
+            <div className="prem-card p-7 flex gap-4">
+              <div className="w-10 h-10 rounded-xl bg-[#0a1628]/[.04] flex items-center justify-center flex-shrink-0">
+                <Phone className="w-5 h-5 text-[#0a1628]" strokeWidth={1.5} />
+              </div>
               <div>
-                <p className="text-xs text-navy/40 font-semibold uppercase tracking-wider mb-1.5">Phone</p>
-                <a href="tel:8799918682" className="block text-navy font-semibold text-sm hover:underline">{c.phone2}</a>
-                <a href="tel:02422295588" className="block text-slate-400 text-sm hover:text-navy transition-colors mt-0.5">{c.phone1}</a>
+                <p className="text-[10px] text-[#0a1628]/25 font-semibold tracking-[.2em] uppercase mb-2">{c.phoneLabel}</p>
+                <a href="tel:8799918682" className="block font-semibold text-[15px] hover:underline">{c.phone2}</a>
+                <a href="tel:02422295588" className="block text-gray-400 text-[14px] mt-0.5">{c.phone1}</a>
               </div>
             </div>
 
-            <div className="p-6 rounded-xl border border-slate-100 flex items-start gap-3">
-              <Mail className="w-4.5 h-4.5 text-navy mt-0.5 flex-shrink-0" strokeWidth={1.75} />
+            <div className="prem-card p-7 flex gap-4">
+              <div className="w-10 h-10 rounded-xl bg-[#0a1628]/[.04] flex items-center justify-center flex-shrink-0">
+                <Mail className="w-5 h-5 text-[#0a1628]" strokeWidth={1.5} />
+              </div>
               <div>
-                <p className="text-xs text-navy/40 font-semibold uppercase tracking-wider mb-1.5">Email</p>
-                <a href={`mailto:${c.email}`} className="text-slate-600 text-sm hover:text-navy transition-colors break-all">{c.email}</a>
+                <p className="text-[10px] text-[#0a1628]/25 font-semibold tracking-[.2em] uppercase mb-2">{c.emailLabel}</p>
+                <a href={`mailto:${c.email}`} className="text-gray-500 text-[14px] break-all hover:text-[#0a1628] transition-colors">{c.email}</a>
               </div>
             </div>
 
-            <div className="p-6 rounded-xl bg-navy-light border border-navy/10 flex flex-col justify-center">
-              <p className="text-navy font-semibold text-base mb-1">Need help?</p>
-              <p className="text-navy/60 text-sm mb-4">Our team responds quickly during OPD hours.</p>
-              <a href="tel:8799918682" className="inline-flex items-center gap-2 text-sm font-semibold text-navy hover:underline">
-                <Phone className="w-4 h-4" />
-                87999 18682
+            <div className="rounded-2xl p-7 bg-[#0a1628] text-white flex flex-col justify-center">
+              <p className="font-semibold text-[17px] mb-1.5">{o.needHelp}</p>
+              <p className="text-white/35 text-[14px] mb-4 leading-relaxed">{o.needHelpDesc}</p>
+              <a href="tel:8799918682" className="inline-flex items-center gap-2 text-[15px] font-semibold hover:underline">
+                <Phone className="w-4 h-4" /> {c.phone2}
               </a>
             </div>
           </div>

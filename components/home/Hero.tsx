@@ -2,117 +2,90 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
-import { ArrowRight, MapPin, ShieldCheck } from "lucide-react";
-import { useLanguage } from "@/context/LanguageContext";
+import Image from "next/image";
+import { ArrowRight, MapPin } from "lucide-react";
+import { content } from "@/lib/content";
 
 export default function Hero() {
-  const { lang, translations: tr } = useLanguage();
-  const containerRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLElement>(null);
+  const h = content.hero;
 
   useEffect(() => {
     let ctx: { revert: () => void } | null = null;
     async function init() {
       const gsap = (await import("gsap")).default;
       ctx = gsap.context(() => {
-        const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
-        tl.fromTo(".hero-eyebrow", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5 })
-          .fromTo(".hero-title", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 }, "-=0.2")
-          .fromTo(".hero-sub", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.5 }, "-=0.3")
-          .fromTo(".hero-ctas", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5 }, "-=0.2")
-          .fromTo(".hero-img", { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.7, ease: "power2.out" }, "-=0.4");
-      }, containerRef);
+        const tl = gsap.timeline({ defaults: { ease: "power4.out" }, delay: 0.8 });
+
+        // Eyebrow slides in
+        tl.fromTo(".h-eyebrow", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.5 })
+        // Headline words reveal with clip
+          .fromTo(".h-word", { yPercent: 110 }, { yPercent: 0, duration: 0.8, stagger: 0.08 }, "-=0.2")
+        // Description fades up
+          .fromTo(".h-desc", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 }, "-=0.4")
+        // Buttons scale in
+          .fromTo(".h-btn", { opacity: 0, y: 16, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.08 }, "-=0.3")
+        // Badges fade
+          .fromTo(".h-badge", { opacity: 0 }, { opacity: 1, duration: 0.4, stagger: 0.06 }, "-=0.2")
+        // Image reveals with parallax feel
+          .fromTo(".h-img-wrap", { opacity: 0, yPercent: 8, scale: 0.94 },
+            { opacity: 1, yPercent: 0, scale: 1, duration: 1, ease: "power2.out" }, "-=0.8")
+        // Decorative line draws
+          .fromTo(".h-line", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power2.inOut" }, "-=0.4");
+      }, ref);
     }
     init();
     return () => ctx?.revert();
   }, []);
 
   return (
-    <section
-      ref={containerRef}
-      className="pt-20 bg-white"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-20 lg:py-28">
-          {/* Left: text */}
+    <section ref={ref} className="pt-20 bg-white">
+      <div className="site-container py-20 lg:py-32">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* Text */}
           <div>
-            <div className="hero-eyebrow opacity-0 inline-flex items-center gap-2 text-xs text-slate-500 font-medium tracking-wide uppercase mb-5">
-              <MapPin className="w-3.5 h-3.5 text-navy" />
-              Rahata, Ahilyanagar · Est. 2007
+            <div className="h-eyebrow inline-flex items-center gap-2 text-[12px] text-[#0a1628]/35 font-medium tracking-widest uppercase mb-8 opacity-0">
+              <MapPin className="w-3 h-3" /> {h.eyebrow}
             </div>
 
-            <h1 className="hero-title opacity-0 text-4xl sm:text-5xl lg:text-[56px] font-bold text-navy leading-[1.1] tracking-tight mb-5">
-              {lang === "hi" ? (
-                <>
-                  हर परिवार के लिए<br />
-                  <span className="text-navy/60">विश्वसनीय देखभाल</span>
-                </>
-              ) : (
-                <>
-                  Trusted Care for<br />
-                  <span className="text-navy/50">Every Family</span>
-                </>
-              )}
+            <h1 className="text-[clamp(2.5rem,5.5vw,3.8rem)] font-extrabold leading-[1.05] tracking-[-0.02em]">
+              <span className="block overflow-hidden"><span className="h-word inline-block">{h.headline}</span></span>
+              <span className="block overflow-hidden"><span className="h-word inline-block text-[#0a1628]/25">{h.headlineFaded}</span></span>
             </h1>
 
-            <p className="hero-sub opacity-0 text-slate-500 text-lg leading-relaxed mb-8 max-w-md">
-              {lang === "hi"
-                ? "मातृत्व, स्त्री रोग और शल्य चिकित्सा — 2007 से राहाता की पहली पसंद।"
-                : "Maternity, gynecology and surgery — the first choice for families across Rahata since 2007."}
+            <p className="h-desc mt-7 text-gray-400 text-lg leading-relaxed max-w-[400px] opacity-0">
+              {h.description}
             </p>
 
-            <div className="hero-ctas opacity-0 flex flex-col sm:flex-row gap-3">
-              <Link
-                href="/appointment"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-navy text-white text-sm font-semibold hover:bg-navy-mid transition-colors duration-200 group"
-              >
-                Book an Appointment
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Link href="/appointment"
+                className="h-btn inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-[#0a1628] text-white text-sm font-semibold hover:bg-[#152244] transition-all duration-300 group opacity-0">
+                {h.cta1} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
               </Link>
-              <Link
-                href="/services"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-slate-200 text-navy text-sm font-medium hover:border-navy hover:bg-navy-light transition-all duration-200"
-              >
-                Our Services
+              <Link href="/services"
+                className="h-btn inline-flex items-center gap-2 px-8 py-3.5 rounded-full border-2 border-gray-200 text-sm font-medium text-[#0a1628] hover:border-[#0a1628]/40 transition-all duration-300 opacity-0">
+                {h.cta2}
               </Link>
             </div>
 
-            {/* Trust indicators */}
-            <div className="mt-10 flex flex-wrap items-center gap-5 text-xs text-slate-400 font-medium">
-              <span className="flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-navy" />
-                Govt. Approved Sonography
-              </span>
-              <span className="flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-navy" />
-                30-Bed Facility
-              </span>
-              <span className="flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-navy" />
-                18+ Years of Service
-              </span>
+            {/* Decorative line */}
+            <div className="h-line mt-12 h-px bg-gray-200 origin-left" style={{ transform: "scaleX(0)" }} />
+
+            <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
+              {h.badges.map((b) => (
+                <span key={b} className="h-badge text-[11px] text-gray-400 font-medium tracking-wide opacity-0">{b}</span>
+              ))}
             </div>
           </div>
 
-          {/* Right: image placeholder */}
-          <div className="hero-img opacity-0 relative">
-            <div className="img-placeholder w-full rounded-2xl overflow-hidden" style={{ aspectRatio: "4/3" }}>
-              <svg className="w-12 h-12 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <p className="text-xs text-slate-400 mt-2">Hospital photo coming soon</p>
-            </div>
-
-            {/* Floating info card */}
-            <div className="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg border border-slate-100 px-4 py-3 hidden sm:block">
-              <p className="text-navy font-bold text-2xl leading-none">5,000+</p>
-              <p className="text-slate-400 text-xs mt-0.5">Successful deliveries</p>
+          {/* Image */}
+          <div className="h-img-wrap opacity-0">
+            <div className="rounded-3xl overflow-hidden shadow-[0_24px_80px_-12px_rgba(10,22,40,.12)]">
+              <Image src="/images/hero-hospital.jpg" alt="Samarth Hospital" width={640} height={420} priority className="w-full h-auto object-cover" />
             </div>
           </div>
         </div>
       </div>
-
-      {/* Bottom rule */}
-      <div className="border-t border-slate-100" />
     </section>
   );
 }

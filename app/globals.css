@@ -1,112 +1,69 @@
 @import "tailwindcss";
 
-:root {
-  --navy: #0D1B3E;
-  --navy-mid: #1B3A6B;
-  --navy-light: #EBF0FB;
-  --gray-50: #F8F9FA;
-  --gray-100: #F1F3F7;
-  --gray-300: #CBD5E1;
-  --gray-500: #64748B;
-  --gray-700: #334155;
-  --gold: #C9A84C;
+@layer base {
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  body {
+    background: #fff;
+    color: #0a1628;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  ::selection { background: #0a1628; color: #fff; }
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #0a1628; border-radius: 99px; }
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+@layer components {
+  .site-container {
+    width: 100%;
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: clamp(1.75rem, 6vw, 5.5rem);
+    padding-right: clamp(1.75rem, 6vw, 5.5rem);
+  }
+
+  #scroll-progress {
+    position: fixed; top: 0; left: 0; height: 2px;
+    background: linear-gradient(90deg, #0a1628, #b89b3f);
+    z-index: 9999; transform-origin: left; transform: scaleX(0);
+  }
+
+  .nav-link { position: relative; }
+  .nav-link::after {
+    content: ''; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%);
+    width: 0; height: 2px; background: #0a1628; border-radius: 1px;
+    transition: width .3s cubic-bezier(.4,0,.2,1);
+  }
+  .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+  .mobile-menu { transform: translateX(100%); transition: transform .35s cubic-bezier(.4,0,.2,1); }
+  .mobile-menu.open { transform: translateX(0); }
+
+  /* Premium card */
+  .prem-card {
+    border: 1px solid rgba(0,0,0,.06);
+    border-radius: 16px;
+    transition: transform .35s cubic-bezier(.4,0,.2,1),
+                box-shadow .35s cubic-bezier(.4,0,.2,1),
+                border-color .35s ease;
+  }
+  .prem-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px -12px rgba(10,22,40,.1);
+    border-color: rgba(10,22,40,.1);
+  }
 }
 
-html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-}
+@layer utilities {
+  @keyframes pulse-glow { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+  .pulse-dot { animation: pulse-glow 2s ease infinite; }
 
-body {
-  background: #ffffff;
-  color: #0D1B3E;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-}
-
-::selection {
-  background: #0D1B3E;
-  color: #ffffff;
-}
-
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #F8F9FA; }
-::-webkit-scrollbar-thumb { background: #0D1B3E; border-radius: 2px; }
-
-/* scroll progress */
-#scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 2px;
-  background: #0D1B3E;
-  z-index: 9999;
-  transform-origin: left center;
-  transform: scaleX(0);
-  will-change: transform;
-}
-
-/* GSAP initial hidden states */
-.reveal { opacity: 0; transform: translateY(30px); }
-.reveal-left { opacity: 0; transform: translateX(-30px); }
-.reveal-right { opacity: 0; transform: translateX(30px); }
-
-/* nav link */
-.nav-link {
-  position: relative;
-  transition: color 0.2s ease;
-}
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1.5px;
-  background: #0D1B3E;
-  transition: width 0.25s ease;
-}
-.nav-link:hover::after,
-.nav-link.active::after { width: 100%; }
-
-/* mobile menu */
-.mobile-menu {
-  transform: translateX(100%);
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.mobile-menu.open { transform: translateX(0); }
-
-/* card hover */
-.card-hover {
-  transition: box-shadow 0.25s ease, transform 0.25s ease;
-}
-.card-hover:hover {
-  box-shadow: 0 8px 30px rgba(13, 27, 62, 0.1);
-  transform: translateY(-3px);
-}
-
-/* image placeholder */
-.img-placeholder {
-  background: #F1F3F7;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #CBD5E1;
-}
-
-/* form input */
-input, textarea, select {
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-input:focus, textarea:focus, select:focus {
-  outline: none;
-  border-color: #0D1B3E !important;
-  box-shadow: 0 0 0 3px rgba(13, 27, 62, 0.08);
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  .float { animation: float 4s ease-in-out infinite; }
 }

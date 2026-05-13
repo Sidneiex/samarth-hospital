@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useLanguage } from "@/context/LanguageContext";
+import Image from "next/image";
+import { content } from "@/lib/content";
 
 export default function WhyChooseUs() {
-  const { translations: tr } = useLanguage();
   const ref = useRef<HTMLElement>(null);
+  const w = content.why;
 
   useEffect(() => {
     let ctx: { revert: () => void } | null = null;
@@ -13,8 +14,18 @@ export default function WhyChooseUs() {
       const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([import("gsap"), import("gsap/ScrollTrigger")]);
       gsap.registerPlugin(ScrollTrigger);
       ctx = gsap.context(() => {
-        gsap.fromTo(".why-left", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.7, ease: "power2.out", scrollTrigger: { trigger: ".why-row", start: "top 82%" } });
-        gsap.fromTo(".why-right", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.7, ease: "power2.out", scrollTrigger: { trigger: ".why-row", start: "top 82%" } });
+        gsap.fromTo(".wy-img", { opacity: 0, x: -40, scale: 0.95 }, {
+          opacity: 1, x: 0, scale: 1, duration: 0.9, ease: "power3.out",
+          scrollTrigger: { trigger: ".wy-row", start: "top 75%" }
+        });
+        gsap.fromTo(".wy-title", { opacity: 0, y: 20 }, {
+          opacity: 1, y: 0, duration: 0.6, ease: "power3.out",
+          scrollTrigger: { trigger: ".wy-row", start: "top 78%" }
+        });
+        gsap.fromTo(".wy-item", { opacity: 0, x: 20 }, {
+          opacity: 1, x: 0, duration: 0.5, stagger: 0.1, ease: "power3.out",
+          scrollTrigger: { trigger: ".wy-items", start: "top 82%" }
+        });
       }, ref);
     }
     init();
@@ -22,34 +33,30 @@ export default function WhyChooseUs() {
   }, []);
 
   return (
-    <section ref={ref} className="py-24 bg-[#F4F6F9]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="why-row grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Left: image placeholder */}
-          <div className="why-left order-2 lg:order-1">
-            <div className="img-placeholder w-full rounded-2xl" style={{ aspectRatio: "4/3" }}>
-              <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <p className="text-xs text-slate-400 mt-2">Hospital interior photo</p>
+    <section ref={ref} className="py-24 lg:py-32 bg-[#fafbfc]">
+      <div className="site-container">
+        <div className="wy-row grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* Image */}
+          <div className="wy-img order-2 lg:order-1">
+            <div className="rounded-3xl overflow-hidden shadow-[0_24px_80px_-12px_rgba(10,22,40,.1)]">
+              <Image src="/images/hospital-interior.jpg" alt="Hospital interior" width={600} height={400} className="w-full h-auto object-cover" />
             </div>
           </div>
 
-          {/* Right: content */}
-          <div className="why-right order-1 lg:order-2">
-            <p className="text-xs font-semibold text-navy/40 uppercase tracking-widest mb-3">Our Promise</p>
-            <h2 className="text-3xl sm:text-4xl font-bold text-navy mb-4">{tr.why.heading}</h2>
-            <p className="text-slate-500 text-base leading-relaxed mb-8">{tr.why.subheading}</p>
+          {/* Content */}
+          <div className="order-1 lg:order-2">
+            <h2 className="wy-title text-2xl sm:text-[2rem] font-bold tracking-tight mb-4">{w.heading}</h2>
+            <p className="text-gray-400 text-[15px] leading-relaxed mb-10 max-w-md">{w.subheading}</p>
 
-            <div className="space-y-4">
-              {tr.why.items.map((item, i) => (
-                <div key={i} className="flex items-start gap-4">
-                  <div className="w-6 h-6 rounded-full bg-navy flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <span className="text-white text-[10px] font-bold">{i + 1}</span>
+            <div className="wy-items space-y-7">
+              {w.items.map((item, i) => (
+                <div key={i} className="wy-item flex gap-5">
+                  <div className="w-9 h-9 rounded-full bg-[#0a1628] flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white text-[12px] font-bold">{i + 1}</span>
                   </div>
                   <div>
-                    <p className="text-navy font-semibold text-[15px]">{item.title}</p>
-                    <p className="text-slate-400 text-sm mt-0.5 leading-relaxed">{item.desc}</p>
+                    <p className="font-semibold text-[15px] tracking-tight">{item.title}</p>
+                    <p className="text-gray-400 text-[13px] mt-1 leading-[1.7]">{item.desc}</p>
                   </div>
                 </div>
               ))}
